@@ -6,7 +6,7 @@ if (!isset($_SESSION["authenticated"]) || !$_SESSION["authenticated"]) {
 }
 //csrf secure
 if (!isset($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = uniqid("",true);
+    $_SESSION['csrf_token'] = uniqid("", true);
 }
 
 include "mysql_conn.php";
@@ -14,7 +14,7 @@ $mysql_obj = new mysql_conn();
 $mysql = $mysql_obj->GetConn();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if(!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
         die("CSRF Token Validation Failed");
     }
     //sql injection addslashes secure
@@ -67,6 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         font-size: 15px;
         cursor: pointer;
     }
+
     h2 {
         color: #000000;
         font-size: 35px;
@@ -77,6 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         align-items: center;
         text-align: center;
     }
+
     input {
         font-size: 20px;
         font-weight: bold;
@@ -93,6 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         align-items: center;
         text-align: center;
     }
+
     label {
         font-size: 20px;
         font-weight: bold;
@@ -109,9 +112,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!--xss secure-->
 <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
     <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
-    <label>שם מרצה<input type="text" name="name"  required><br></label>
+    <label>שם מרצה<input type="text" name="name" required><br></label>
     <label> מספר תיבת דואר<input type="number" name="Box" required><br></label>
-    <label>מספר טלפון<input type="text" name="phonenumber"  required ><br></label><br><br>
+    <label>מספר טלפון<input type="text" name="phonenumber" required><br></label><br><br>
     <input type="submit" value="  הוסף מרצה">
 </form>
 </body>
